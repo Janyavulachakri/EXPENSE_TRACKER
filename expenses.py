@@ -108,16 +108,38 @@ def update_expense(expense_id,new_amount):
     return False
 
 def delete_expense(expense_id):
-    
-    for expense in expenses:
-        if expense["id"] == expense_id:
-            expenses.remove(expense)
-            print("expense deleted successfully")
-            input("\nPress Enter to Continue...")
-            return True
 
-   
-    print("Expense not found")
+    for expense in expenses:
+
+        if expense["id"] == expense_id:
+
+            print("\nExpense Found:")
+            print(f"ID       : {expense['id']}")
+            print(f"Date     : {expense['date']}")
+            print(f"Category : {expense['category']}")
+            print(f"Amount   : ₹{expense['amount']:,.2f}")
+
+            while True:
+                confirm = input(
+                    "\nAre you sure you want to delete this expense? (y/n): "
+                ).strip().lower()
+
+                if confirm == "y":
+                    expenses.remove(expense)
+
+                    print("\n✅ Expense deleted successfully.")
+                    input("\nPress Enter to Continue...")
+                    return True
+
+                elif confirm == "n":
+                    print("\n❌ Delete cancelled.")
+                    input("\nPress Enter to Continue...")
+                    return False
+
+                else:
+                    print("❌ Please enter 'y' for yes or 'n' for no.")
+
+    print("\n❌ Expense not found.")
     input("\nPress Enter to Continue...")
     return False
     
