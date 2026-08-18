@@ -91,10 +91,7 @@ def view_expenses():
 
 
 def get_total():
-    total = 0
-    for expense in expenses:
-        total += expense["amount"]
-    return total
+    return sum(expense["amount"] for expense in expenses)
 
 def update_expense(expense_id,new_amount):
     for expense in expenses:
