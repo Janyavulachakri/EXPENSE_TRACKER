@@ -1,7 +1,6 @@
 import csv
 from datetime import date
-today = date.today().isoformat()
-print(today)
+
 expenses = []
 next_id = 1
 
@@ -57,7 +56,7 @@ def add_expense(category,amount):
     global next_id
     expense = {
         "id": next_id,
-        "date": today,
+        "date": date.today().isoformat(),
         "category": category,
         "amount": amount
     }
@@ -90,7 +89,14 @@ def view_expenses():
     input("\nPress Enter to Continue...")
 
 
-def get_total():
+def get_total(category=None):
+    if category:
+        return sum(
+            expense["amount"]
+            for expense in expenses
+            if expense["category"].lower() == category.lower()
+        )
+
     return sum(expense["amount"] for expense in expenses)
 
 def update_expense(expense_id,new_amount):
@@ -199,10 +205,20 @@ def main():
 
 
         elif choice == "3":
-            print("="*40)
+            print("=" * 40)
             print("     TOTAL EXPENSES")
-            print("="*40)
-            print(f"Total: ₹{get_total():,.2f}")
+            print("=" * 40)
+
+            print(f"Overall Total: ₹{get_total():,.2f}")
+
+            category = input(
+                "\nEnter category for category total "
+                "(or press Enter to skip): "
+            ).strip()
+
+            if category:
+                print(f"{category} Total: ₹{get_total(category):,.2f}")
+
             print("=" * 40)
             input("\nPress Enter to Continue")
 
