@@ -99,9 +99,10 @@ def get_total(category=None):
 
     return sum(expense["amount"] for expense in expenses)
 
-def update_expense(expense_id,new_amount):
+def update_expense(expense_id,new_category,new_amount):
     for expense in expenses:
         if expense["id"] == expense_id:
+            expense["category"]= new_category
             expense["amount"] = new_amount
             print("Expense updated successfully")
             input("\nPress Enter to Continue...")
@@ -233,12 +234,13 @@ def main():
                         continue
 
                     new_amount = int(input("Enter new amount: "))
+                    new_category = input("Enter new category: ").strip().title()
 
                     if new_amount<=0:
                         print("Amount must be greater than 0. ")
                         continue
 
-                    if update_expense(expense_id,new_amount):
+                    if update_expense(expense_id,new_category,new_amount):
                         save_expenses()
                     break
                 except ValueError:
