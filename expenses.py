@@ -77,14 +77,14 @@ def view_expenses():
         print("-"*60)
 
     
-    for expense in expenses:
-        print(
-            f"{expense['id']:<5}"
-            f"{expense['date']:<15}"
-            f"{expense['category']:<15}"
-            f"{expense['amount']:>10}"
+        for expense in expenses:
+            print(
+                f"{expense['id']:<5}"
+                f"{expense['date']:<15}"
+                f"{expense['category']:<15}"
+                f"{expense['amount']:>10}"
 
-        )
+            )
     print("="*60)
     input("\nPress Enter to Continue...")
 
