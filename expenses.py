@@ -239,6 +239,9 @@ def main():
                     if new_amount<=0:
                         print("Amount must be greater than 0. ")
                         continue
+                    if not new_category:
+                        print("Category cannot be empty.")
+                        continue
 
                     if update_expense(expense_id,new_category,new_amount):
                         save_expenses()
