@@ -88,6 +88,32 @@ def view_expenses():
     print("="*60)
     input("\nPress Enter to Continue...")
 
+def get_highest_lowest_expense():
+    if not expenses:
+        print("No expenses found.")
+        return
+
+    highest = max(expenses, key=lambda expense: expense["amount"])
+    lowest = min(expenses, key=lambda expense: expense["amount"])
+
+    print("\n" + "=" * 40)
+    print("     HIGHEST & LOWEST EXPENSE")
+    print("=" * 40)
+
+    print("\nHighest Expense:")
+    print(f"ID       : {highest['id']}")
+    print(f"Date     : {highest['date']}")
+    print(f"Category : {highest['category']}")
+    print(f"Amount   : ₹{highest['amount']:,.2f}")
+
+    print("\nLowest Expense:")
+    print(f"ID       : {lowest['id']}")
+    print(f"Date     : {lowest['date']}")
+    print(f"Category : {lowest['category']}")
+    print(f"Amount   : ₹{lowest['amount']:,.2f}")
+
+    print("=" * 40)
+    input("\nPress Enter to Continue...")
 
 def get_total(category=None):
     if category:
@@ -161,7 +187,9 @@ def main():
         print("3. TOTAL EXPENSES")
         print("4. UPDATE EXPENSES")
         print("5. DELETE EXPENSES")
-        print("6. EXIT")
+        print("6. HIGHEST & LOWEST EXPENSES")
+        print("7. EXIT")
+        
         print()
         print("="*40)
         choice = input("Choose an option")
@@ -272,8 +300,11 @@ def main():
             
 
         elif choice == "6":
-            print("\nThankyou for using Expense Tracker!")
-            break
+              get_highest_lowest_expense()
+
+        elif choice == "7":
+              print("\nThankyou for using Expense Tracker!")
+              break
 
         else:
             print("Invalid option.Please choose between 1 and 6.")
